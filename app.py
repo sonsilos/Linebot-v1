@@ -75,4 +75,4 @@ schedule.every().day.at("17:30").do(job)
 
 while True:
     schedule.run_pending()
-    time.sleep(6000) # wait one minute
+    # time.sleep(6000) # wait one minute
