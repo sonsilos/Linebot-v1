@@ -1,5 +1,6 @@
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 import os, re, json
-import schedule
 import time
 from datetime import datetime, date, timedelta
 from flask import Flask, request, abort
@@ -42,7 +43,7 @@ def callback():
 
     # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+
     print ("Request body: " + body)
     # handle webhook body
     try:
@@ -55,10 +56,23 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print ("event.reply_token: " + event.reply_token)
-    text = event.message.text
+    # specify the url
+    quote_page = 'https://www.settrade.com/C04_01_stock_quote_p1.jsp?txtSymbol=' + event.message.text
+
+    # query the website and return the html to the variable 'page'
+    page = urlopen(quote_page)
+
+    # parse the html using beautiful soup and store in variable `soup`
+    soup = BeautifulSoup(page, 'html.parser')
+
+    # Take out the <div> of name and get its value
+    name_box = soup.find('div', attrs={'class': 'round-border'})
+
+    name = name_box.text.strip(' \t\n\r') # strip() is used to remove starting and trailing
+    text_message = TextSendMessage(text=name)
     line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=text))
+            text_message)
     
 
 if __name__ == "__main__":
