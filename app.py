@@ -1,5 +1,3 @@
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 import os, re, json
 import time
 from datetime import datetime, date, timedelta
@@ -14,6 +12,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -73,10 +73,8 @@ def handle_message(event):
     name_box = soup.find('div', attrs={'class': 'round-border'})
 
     name = name_box.text.strip(' \t\n\r') # strip() is used to remove starting and trailing
-    text_message = TextSendMessage(text=name)
-    line_bot_api.reply_message(
-            event.reply_token,
-            text_message)
+    text_message = TextSendMessage(text=str(name))
+    line_bot_api.reply_message(event.reply_token,text_message)
     
 
 if __name__ == "__main__":
