@@ -20,6 +20,9 @@ channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
+text_message = TextSendMessage(text='Hello, world')
+line_bot_api.push_message('U006eef227b0fda8xxxxxxxxxxx', text_message)
+
 @app.route('/')
 def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
@@ -38,7 +41,7 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-
+    print "Request body: " + body
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -49,6 +52,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    print "event.reply_token: " + event.reply_token
     text = event.message.text
     line_bot_api.reply_message(
             event.reply_token,
