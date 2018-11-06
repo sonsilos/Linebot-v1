@@ -22,7 +22,6 @@ channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-
 text_message = TextSendMessage(text='Hello, world !this is first build.')
 line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
 
@@ -66,13 +65,13 @@ if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
 
 
-def job(t):
-    text_message = TextSendMessage(text='This is job every day.')
-    line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
-    return
+# def job():
+#     text_message = TextSendMessage(text='This is job every day.')
+#     line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
+#     return
 
-schedule.every().day.at("17:30").do(job)
+# schedule.every().day.at("17:30").do(job)
 
-while True:
-    schedule.run_pending()
+# while True:
+#     schedule.run_pending()
     # time.sleep(6000) # wait one minute
