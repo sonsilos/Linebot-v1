@@ -32,9 +32,9 @@ line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
 
 schedule.every().day.at("17:30").do(job)
 
-while True:
-    schedule.run_pending()
-    time.sleep(6000) # wait one minute
+# while True:
+#     schedule.run_pending()
+#     time.sleep(6000) # wait one minute
 
 @app.route('/')
 def homepage():
