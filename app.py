@@ -73,7 +73,7 @@ def handle_message(event):
     name_box = soup.find('div', attrs={'class': 'round-border'})
 
     name = name_box.text.strip(' \t\n\r') # strip() is used to remove starting and trailing
-    text_message = TextSendMessage(text=str(name))
+    text_message = TextSendMessage(text=str(name).replace('\n', ' '))
     line_bot_api.reply_message(event.reply_token,text_message)
     
 

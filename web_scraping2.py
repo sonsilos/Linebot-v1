@@ -13,20 +13,21 @@ soup = BeautifulSoup(page, 'html.parser')
 #  SET Summary 
 set_box = soup.find('div', attrs={'class': 'econ_stock_set_set_summary'})
 
-name = set_box.text.strip(' \t\n\r') # strip() is used to remove starting and trailing
-print (name)
+name = set_box.text.strip('') # strip() is used to remove starting and trailing
+print (name.replace('\n', ''))
 
-# SET Top Value
-top_value_box = soup.find('div', attrs={'class':'econ_stock_set_set_value'})
-top_value = top_value_box.text.strip(' \t\n\r')
-print (top_value)
+# # SET Top Value
+# top_value_box = soup.find('div', attrs={'class':'econ_stock_set_set_value'})
+# top_value = top_value_box.text.strip(' \t\n\r')
+# print (top_value.replace('\n', ' ').replace('     ', '\n').replace(' ', '  '))
 
-# SET Top Volume
-top_volume_box = soup.find('div', attrs={'class':'econ_stock_set_set_volume'})
-top_volume = top_volume_box.text.strip(' \t\n\r')
-print (top_volume)
+# # SET Top Volume
+# top_volume_box = soup.find('div', attrs={'class':'econ_stock_set_set_volume'})
+# top_volume = top_volume_box.text.strip(' \t\n\r')
+# print (top_volume.replace('\n', ' ').replace('     ', '\n').replace(' ', '  '))
 
-# SET Top Gain
-top_gain_box = soup.find('div', attrs={'class':'econ_stock_set_set_gain'})
-top_gain = top_gain_box.text.strip(' \t\n\r')
-print (top_gain)
+# # SET Top Gain
+# top_gain_box = soup.find('div', attrs={'class':'econ_stock_set_set_gain'})
+# top_gain = top_gain_box.text.strip(' \t\n\r')
+# print (str(top_gain).replace('\n', ' ').replace('     ', '\n').replace(' ', '  '))
+
