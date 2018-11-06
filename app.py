@@ -20,8 +20,8 @@ channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
-# text_message = TextSendMessage(text='Hello, world')
-# line_bot_api.push_message('U006eef227b0fda8xxxxxxxxxxx', text_message)
+text_message = TextSendMessage(text='Hello, world')
+line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
 
 @app.route('/')
 def homepage():
