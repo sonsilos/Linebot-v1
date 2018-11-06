@@ -24,7 +24,11 @@ line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
 
 text_message = TextSendMessage(text='Hello, world !this is first build.')
+text_message2 = TextSendMessage(text='This is smart bot for help your trade.')
+text_message3 = TextSendMessage(text='Please enter stcok name for anlyse data.')
 line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message)
+line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message2)
+line_bot_api.push_message('U3f3b79342293017ebce23e9bc12f5c63', text_message3)
 
 @app.route('/')
 def homepage():
@@ -57,7 +61,7 @@ def callback():
 def handle_message(event):
     print ("event.reply_token: " + event.reply_token)
     # specify the url
-    quote_page = 'https://www.settrade.com/C04_01_stock_quote_p1.jsp?txtSymbol=' + event.message.text
+    quote_page = 'https://www.settrade.com/C04_01_stock_quote_p1.jsp?txtSymbol=' + str(event.message.text)
 
     # query the website and return the html to the variable 'page'
     page = urlopen(quote_page)
